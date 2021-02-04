@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>WebQuery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="../static/css/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-print-json@0.3/dist/pretty-print-json.css">
+
+
+</head>
+<body class="bg-dark">
+
+<div>
+    <div class="container-fluid mt-2 ">
+
+        <div class="row">
+
+
+            <div th:insert="~{../static/parts/navbar:: nav}" class="col-md-8 col-lg-2 navbar-container"></div>
+
+            <div class="col-md-8 col-lg-10 content-container">
+
+                <div>
+
+
+                    <div class="row">
+
+                        <div class="col-sm-4">
+
+                            <div class="ml-3">
+                                <a href="/suz">
+                                    <button type="submit"
+                                            class="m-2 btn btn-warning" style="width: 200px" data-dismiss="modal">
+                                        <b>СУЗ</b>
+                                    </button>
+                                </a>
+
+                                <a href="/codeswaiting">
+                                    <button type="submit"
+                                            class="m-2 btn btn-warning" style="width: 200px" data-dismiss="modal">
+                                        <b>В ожидании кодов</b>
+                                    </button>
+                                </a>
+                            </div>
+
+
+                            <form method="post" th:action="@{/json}">
+
+                                <!--                                <h2 class="text-light">Работа с SSCC:</h2>-->
+                                <div class="form-label-group mt-3 ml-3 ">
+                                    <label class="text-light">Работа с SSCC: </label>
+                                    <input type="text" name="SSCC" class="form-control" placeholder="SSCC: " required=""
+                                           autofocus="" th:value="${sscc}">
+
+                                </div>
+
+                                <div class="mt-3 ml-3">
+                                    <button th:formaction="@{/json}" formmethod="post" type="submit"
+                                            class="m-2 btn btn-warning" data-dismiss="modal"><b>Создать JSON</b>
+                                    </button>
+                                    <button th:formaction="@{/mdlp}" formmethod="post" type="submit"
+                                            class="m-2 btn btn-warning" data-dismiss="modal"><b>Запрос в МДЛП</b>
+                                    </button>
+                                    <button th:formaction="@{/tw}" formmethod="post" type="submit"
+                                            class="m-2 btn btn-warning" data-dismiss="modal"><b>Запрос в TW</b></button>
+                                </div>
+
+
+                                <div th:if="${jid}" class="mt-3 ml-3">
+                                    <a th:href="'/jobs/' + ${jid}" type="submit"
+                                       class="m-2 btn btn-warning" data-dismiss="modal" th:text=${jid} style="font-weight:bold"></a>
+                                </div>
+
+                            </form>
+
+
+                            <div class="mt-3 ml-3">
+                                <div>
+                                    <span th:text="${code}" class="text-white bg-dark"/> <br>
+                                    <span th:text="${grpcnt}" class="text-white bg-dark"/><br>
+                                    <span th:text="${indcnt}" class="text-white bg-dark"/><br><br>
+
+                                </div>
+                                <div th:each="el : ${array}">
+                                    <span th:text="${el}" class="text-white bg-dark"/><br>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <form th:action="@{/sendjson}" method="post">
+                                <div class="form-group">
+                                    <label for="textarea"><h2 class="text-light">Результат:</h2></label>
+                                    <textarea id="textarea" name="textarea" th:text="${json}" class="form-control"
+                                              rows="20">
+                                </textarea>
+                                </div>
+                                <div class="mt-3 mb-2">
+                                    <button type="submit" class="btn btn-warning" data-dismiss="modal"><b>Отправить в
+                                        TraceWay</b>
+                                    </button>
+                                </div>
+
+                            </form>
+
+                            <label for="textarea"><h2 class="text-light">Ответ TraceWay:</h2></label>
+                            <textarea id="twresponse" th:text="${twresponse}" class="form-control" rows="10">
+                                </textarea>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <pre id="example"></pre>
+
+
+                <script>
+          const myData = {
+      "name":"John",
+      "age":30,
+      "cars": {
+        "car1":"Ford",
+        "car2":"BMW",
+        "car3":"Fiat"
+      }
+};
+$('#example').html(prettyPrintJson.toHtml(myData));
+
+
+
+
+
+                </script>
+
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                        crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                        crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                        crossorigin="anonymous"></script>
+
+
+                <script src="../static/main.js"></script>
+
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+                        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+                        crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/pretty-print-json@0.3/dist/pretty-print-json.js"></script>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

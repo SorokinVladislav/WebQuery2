@@ -1,0 +1,105 @@
+<div th:fragment="nav">
+
+    <!-- Вертикальное меню -->
+    <nav class="navbar navbar-expand-md navbar-light">
+
+            <img style="width: 100%" class="displayed" src="https://sun9-39.userapi.com/impg/zrwxEd3CkM2MyycRLnx5KLMFpluNOqlZSSdPnA/lc4Re0xnQP8.jpg?size=301x173&quality=96&proxy=1&sign=1188d0b87fed7d931018d06e4c9d3844&type=album">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <!-- Пункты вертикального меню -->
+
+
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <div class="col-sm" align="center">
+
+                        <br> <a href="/jobs"  class="btn btn-secondary btn-block">Все работы</a><br>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="col-sm" align="center">
+                        <a href="/closed"  class="btn btn-secondary btn-block">Закрытые работы</a><br>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="col-sm" align="center">
+                        <a href="/suspend"  class="btn btn-secondary btn-block">Остановленные работы</a><br>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="col-sm" align="center">
+                        <a href="/mistakes"  class="btn btn-secondary  btn-block">Работы с ошибками</a><br>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <div class="col-sm" align="center">
+                        <a href="/json"  class="btn btn-secondary btn-block">Администрирование</a><br><br>
+                    </div>
+                </li>
+
+
+
+
+                <form th:action="@{/batch}" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="batch" placeholder="Введите номер серии" aria-label="Введите номер серии" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn bg-secondary text-white" type="submit">Поиск</button>
+                        </div>
+                    </div>
+                </form>
+
+                <form th:action="@{/jobid}" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control h6" name="jobid" placeholder="Введите JobID" aria-label="Введите JobID" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn bg-secondary text-white" type="submit">Поиск</button>
+                        </div>
+                    </div>
+                </form>
+
+                <form th:action="@{/jobname}" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="jobname" placeholder="Введите JobName" aria-label="Введите JobName" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn bg-secondary text-white" type="submit">Поиск</button>
+                        </div>
+                    </div>
+                </form>
+
+
+                <!--      Запрос баланса-->
+
+                <div th:if="${balance}" class="m-3">
+                    <button
+                            class="m-2 btn btn-warning" style="font-weight:bold" align="center" data-dismiss="modal" th:text=${balance}></button>
+
+<!--                    <span-->
+<!--                            class="btn btn-warning" align="center" data-dismiss="modal" th:text=${balance} style="font-weight:bold">-->
+<!--                    </span>-->
+                </div>
+
+                <!--Логаут-->
+
+                <div>
+                <form th:action="@{/logout}" method="post">
+
+                    <div class="input-group-append mt-5" align="center">
+                        <button class="btn bg-secondary text-white align-middle" type="submit">Выход</button>
+                    </div>
+
+                </form>
+
+
+
+                </div>
+
+            </ul>
+        </div>
+    </nav>
+</div>
